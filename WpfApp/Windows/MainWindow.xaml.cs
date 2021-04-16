@@ -199,34 +199,50 @@ namespace WpfApp
         {
             const int delay = 100;
 
+            // Switch back to the customer database window
             sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LMENU, VirtualKeyCode.TAB);
 
+            // Choose customer
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.TAB); // Extra enter, one enter gets "eaten" after Alt+Tab-ing
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
+
+            // Skip unnecessary fields
             sim.Keyboard.Sleep(delay + 300).KeyPress(VirtualKeyCode.RETURN); // Wait for window to close
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             //sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN); // WARNING: If Cislo odberatela window was already opened once and closed, this is then NECESSARY
 
+            // Fill invoice amount
             sim.Keyboard.Sleep(delay).TextEntry(amount.Text); // Fakturovane eura
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
-
+            
+            // Skip unnecessary fields
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
+            // Format dates
             var dateOfPaymentText = DateTime.Parse(date1Picker.Text).ToString("dd.MM.yyyy");
             var dueDateText = DateTime.Parse(date2Picker.Text).ToString("dd.MM.yyyy");
 
+            // Fill dates
             sim.Keyboard.Sleep(delay).TextEntry(dateOfPaymentText); // Datum dodania/platby
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
+
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
+
             sim.Keyboard.Sleep(delay).TextEntry(dueDateText); // Datum splatnosti
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
+
+            // Skip unnecessary fields
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
+
+            // Fill invoice type
             sim.Keyboard.Sleep(delay).TextEntry("VYR"); // Druh faktury
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
+
+            // Skip unnecessary fields
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
         }
 
