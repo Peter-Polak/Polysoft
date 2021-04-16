@@ -90,7 +90,9 @@ namespace WpfApp
             amount.textBox.Text = "";
         }
 
-        // Fill the first row of invoice (invoice ID), open customer database window and look up customer
+        /// <summary>
+        /// Fill the first row of invoice (invoice ID), open customer database window and look up customer.
+        /// </summary>
         private void FillFirsRow()
         {
             const int delay = 100;
@@ -194,7 +196,9 @@ namespace WpfApp
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
         }
 
-        // Fill the rest of the invoice. Must have customer database window open and it must be the last window in focus.
+        /// <summary>
+        /// Fill the rest of the invoice. Must have customer database window open and it must be the last window in focus.
+        /// </summary>
         private void FillForm()
         {
             const int delay = 100;
@@ -246,7 +250,11 @@ namespace WpfApp
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
         }
 
-        // Event handler for closing application when Esc key is pressed.
+        /// <summary>
+        /// Event handler for closing application when Esc key is pressed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -260,14 +268,22 @@ namespace WpfApp
             date2Picker.IsEnabled = false;
         }
 
-        // Set date2 value to date1 and offset it by 15 days.
+        /// <summary>
+        /// Set date2 value to date1 and offset it by 15 days.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dateCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             date2Picker.SelectedDate = DateTime.Parse(date1Picker.Text).AddDays(15);
             date2Picker.IsEnabled = true;
         }
 
-        // Set date2 value to date1 if check box is checked or set date2 value to date1 and offset it by 15 days.
+        /// <summary>
+        /// Set date2 value to date1 if check box is checked or set date2 value to date1 and offset it by 15 days.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void date1Picker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             if(dateCheckBox.IsChecked ?? false)
@@ -280,7 +296,11 @@ namespace WpfApp
             }
         }
 
-        // Update IČ DPh field if the user is typing in DIČ field and format it (prepend SK at the start).
+        /// <summary>
+        /// Update IČ DPh field if the user is typing in DIČ field and format it (prepend SK at the start).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dic_TextChanged(object sender, TextChangedEventArgs e)
         {
             string icDphEdited = "SK" + (sender as TextBox).Text;
