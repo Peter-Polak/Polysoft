@@ -7,13 +7,16 @@
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:WpfApp.User_Controls"
         Title="MainWindow" Height="526" Width="800">
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-
+        
+        <!-- Invoice number column -->
         <Grid Grid.Column="0" Margin="10, 0, 10, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -38,6 +41,7 @@
                     Click="fillFirstRowButton_Click"/>
         </Grid>
 
+        <!-- Customer column -->
         <Grid Grid.Column="1" Margin="10, 0, 10, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -48,6 +52,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
+            <!-- Look up customer -->
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -69,6 +74,7 @@
                         Click="fillFirstRowButton_Click"/>
             </Grid>
 
+            <!-- Insert new customer -->
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -112,6 +118,7 @@
             </Grid>
         </Grid>
 
+        <!-- Fill invoice column -->
         <Grid Grid.Column="2" Margin="10, 0, 10, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -149,4 +156,5 @@
                     Click="fillFormButton_Click"/>
         </Grid>
     </Grid>
+    
 </Window>
