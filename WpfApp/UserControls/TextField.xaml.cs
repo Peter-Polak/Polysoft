@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp.User_Controls
+namespace WpfApp.UserControls
 {
     /// <summary>
     /// Interaction logic for TextField.xaml

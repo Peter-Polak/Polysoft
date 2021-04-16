@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        xmlns:uc="clr-namespace:WpfApp.User_Controls"
+        xmlns:uc="clr-namespace:WpfApp.UserControls"
         Title="Polysoft - Add new invoice" Height="526" Width="504">
     
     

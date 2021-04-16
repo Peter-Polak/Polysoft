@@ -17,7 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WindowsInput;
 using WindowsInput.Native;
-using WpfApp.User_Controls;
+using WpfApp.UserControls;
 
 namespace WpfApp
 {
