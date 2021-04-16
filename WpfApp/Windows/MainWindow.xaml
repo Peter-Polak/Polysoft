@@ -6,9 +6,22 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:WpfApp.UserControls"
+        xmlns:cc="clr-namespace:WpfApp.CustomControls"
         Title="Polysoft - Add new invoice" Height="526" Width="504">
-    
-    
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="Button">
+                <Setter Property="Padding" Value="10, 5, 10, 5"/>
+                <Setter Property="Margin" Value="10, 5, 10, 5"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -109,6 +122,7 @@
                     <ComboBox x:Name="state" IsEditable="True" 
                               ItemsSource="{Binding States}" 
                               SelectedItem="{Binding SelectedState, Mode=TwoWay}"/>
+                    <!--<cc:MyButton Text="Testing" Background="Chocolate"></cc:MyButton>-->
                 </StackPanel>
 
                 <Button x:Name="insertNewCustomerButton" Content="Vložiť" 
@@ -127,7 +141,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
