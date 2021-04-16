@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:WpfApp.User_Controls"
-        Title="MainWindow" Height="526" Width="800">
+        Title="Polysoft - Add new invoice" Height="526" Width="504">
     
     
     <Grid>
