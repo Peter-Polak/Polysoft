@@ -5,72 +5,148 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="495" Width="800">
+        xmlns:uc="clr-namespace:WpfApp.User_Controls"
+        Title="MainWindow" Height="526" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="79*"/>
-            <ColumnDefinition Width="321*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="groupBox1" Header="Prvý riadok" Margin="0,0,0,379" Grid.ColumnSpan="2">
+
+        <Grid Grid.Column="0" Margin="10, 0, 10, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="1. Prvý riadok"/>
+            <uc:TextField x:Name="year" Title="Rok:" 
+                          Grid.Row="1"/>
+            <uc:TextField x:Name="invoiceNumber" Title="Čislo faktury:"
+                          Grid.Row="2"/>
+            <Button x:Name="fillFirstRowButton" Content="Vyplniť" 
+                    Grid.Row="4"
+                    Width="62" 
+                    Click="fillFirstRowButton_Click"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="10, 0, 10, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
             <Grid>
-                <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Margin="10,36,0,0" Text="2021" TextWrapping="Wrap" VerticalAlignment="Top" Width="51"/>
-                <Label x:Name="yearLabel" Content="Rok" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                <Label x:Name="invoiceNumLabel" Content="Čislo faktury" HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="invoiceNumTextBox" HorizontalAlignment="Left" Margin="69,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-                <Label x:Name="customerLabel" Content="Názov odberateľa" HorizontalAlignment="Left" Margin="217,10,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="customerTextBox" HorizontalAlignment="Left" Margin="217,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" TextChanged="customerTextBox_TextChanged"/>
-
-                <Button x:Name="button1" Content="Vyplniť" HorizontalAlignment="Left" Margin="499,36,0,0" VerticalAlignment="Top" Click="button1_Click" Width="62"/>
+                <Label Content="2. Hladať odberateľa"/>
+                <uc:TextField x:Name="customerName" 
+                              Title="Názov odberateľa:"
+                              Grid.Row="1"/>
+                <Button x:Name="findCustomerButton" Content="Hladať" 
+                        Grid.Row="2"
+                        Width="62" 
+                        Click="fillFirstRowButton_Click"/>
             </Grid>
-        </GroupBox>
 
-        <GroupBox x:Name="groupBox2" Header="Vložiť nového odberateľa" Margin="0,105,0,190" Grid.ColumnSpan="2">
-            <Grid>
-                <Label x:Name="customerNumLabel" Content="Čislo odberateľa" HorizontalAlignment="Left" Margin="12,17,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="customerNumTextBox" HorizontalAlignment="Left" Margin="12,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                <Label x:Name="customerNameLabel" Content="Názov odberaťeľa" HorizontalAlignment="Left" Margin="144,16,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="customerNameTextBox" HorizontalAlignment="Left" Margin="144,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-                <Label x:Name="icoLabel" Content="IČO" HorizontalAlignment="Left" Margin="12,81,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="icoTextBox" HorizontalAlignment="Left" Margin="12,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <Label Content="3.a Vložiť nového odberateľa"/>
+                <uc:TextField x:Name="customerNumber" 
+                              Title="Čislo odberateľa:"
+                              Grid.Row="1"/>
+                <uc:TextField x:Name="ico"
+                              Title="IČO:"
+                              Grid.Row="2"/>
+                <uc:TextField x:Name="dic"
+                              Title="DIČ:"
+                              Grid.Row="3"/>
+                <uc:TextField x:Name="icDph"
+                              Title="IČ DPH:"
+                              Grid.Row="4"/>
 
-                <Label x:Name="dicLabel" Content="DIČ" HorizontalAlignment="Left" Margin="144,81,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="dicTextBox" HorizontalAlignment="Left" Margin="144,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="dicTextBox_TextChanged"/>
+                <StackPanel Grid.Row="5">
+                    <Label Content="Štát"/>
+                    <ComboBox x:Name="state" IsEditable="True" 
+                              ItemsSource="{Binding States}" 
+                              SelectedItem="{Binding SelectedState, Mode=TwoWay}"/>
+                </StackPanel>
 
-                <Button x:Name="button2" Content="Vyplniť" HorizontalAlignment="Left" Margin="498,74,0,0" VerticalAlignment="Top" Click="button2_Click" Width="62"/>
-
-                <Label Content="IČ DPH" HorizontalAlignment="Left" Margin="274,81,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="icDphTextBox" HorizontalAlignment="Left" Margin="274,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-
-                <Label x:Name="stateLabel" Content="Štát" HorizontalAlignment="Left" Margin="274,12,0,0" VerticalAlignment="Top"/>
-                <ComboBox x:Name="stateComboBox" HorizontalAlignment="Left" Margin="274,39,0,0" VerticalAlignment="Top" Width="157" IsEditable="True">
-                    <ComboBoxItem Content="Slovenská republika" IsSelected="True"/>
-                    <ComboBoxItem Content="Česká republika"/>
-                    <ComboBoxItem Content="Maďarsko"/>
-                    <ComboBoxItem Content="Poľsko"/>
-                    <ComboBoxItem Content="Rakúsko"/>
-                    <ComboBoxItem Content="USA"/>
-                </ComboBox>
+                <Button x:Name="insertNewCustomerButton" Content="Vložiť" 
+                    Grid.Row="6"
+                    Width="62" 
+                    Click="insertNewCustomerButton_Click"/>
             </Grid>
-        </GroupBox>
+        </Grid>
 
-        <GroupBox x:Name="groupBox3" Header="Vyplniť zvyšok formulára" Margin="0,305,0,10" Grid.ColumnSpan="2">
-            <Grid>
-                <Label x:Name="amountLabel" Content="Faktúrované eurá" HorizontalAlignment="Left" Margin="12,17,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="amountTextBox" HorizontalAlignment="Left" Margin="12,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Grid Grid.Column="2" Margin="10, 0, 10, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Label x:Name="dateLabel" Content="Dátum dodania/platby" HorizontalAlignment="Left" Margin="144,16,0,0" VerticalAlignment="Top"/>
-                <DatePicker x:Name="date1Picker" HorizontalAlignment="Left" Margin="144,40,0,0" VerticalAlignment="Top" DisplayDate="2021-04-15" Width="130" FirstDayOfWeek="Monday" SelectedDateChanged="date1Picker_SelectedDateChanged"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
-                <Label Content="Datum splatnosti" HorizontalAlignment="Left" Margin="292,13,0,0" VerticalAlignment="Top"/>
-                <DatePicker x:Name="date2Picker" HorizontalAlignment="Left" Margin="292,39,0,0" VerticalAlignment="Top" Width="130" FirstDayOfWeek="Monday"/>
+            <Label Content="3.b Vyplniť formulár"/>
+            <uc:TextField x:Name="amount" 
+                          Title="Faktúrované eurá:"
+                          Grid.Row="1"/>
 
-                <Button x:Name="button3" Content="Vyplniť" HorizontalAlignment="Left" Margin="496,0,0,0" VerticalAlignment="Center" Click="button3_Click" Width="62"/>
-                <CheckBox x:Name="dateCheckBox" Content="Rovnaký ako dodania" HorizontalAlignment="Left" Margin="292,68,0,0" VerticalAlignment="Top" Checked="dateCheckBox_Checked" Unchecked="dateCheckBox_Unchecked"/>
-            </Grid>
-        </GroupBox>
+            <StackPanel Grid.Row="2">
+                <Label Content="Dátum dodania/platby"/>
+                <DatePicker x:Name="date1Picker" Width="130" FirstDayOfWeek="Monday"
+                            SelectedDateChanged="date1Picker_SelectedDateChanged"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3">
+                <Label Content="Datum splatnosti"/>
+                <DatePicker x:Name="date2Picker" Width="130" FirstDayOfWeek="Monday"/>
+                <CheckBox x:Name="dateCheckBox" Content="Rovnaký ako dodania" 
+                          Checked="dateCheckBox_Checked" Unchecked="dateCheckBox_Unchecked"/>
+            </StackPanel>
+
+            <Button x:Name="fillFormButton" Content="Vyplniť" 
+                    Grid.Row="4"
+                    Width="62" 
+                    Click="fillFormButton_Click"/>
+        </Grid>
     </Grid>
 </Window>

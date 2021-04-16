@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -16,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WindowsInput;
 using WindowsInput.Native;
+using WpfApp.User_Controls;
 
 namespace WpfApp
 {
@@ -26,10 +28,20 @@ namespace WpfApp
     {
         private InputSimulator sim;
 
+        public ObservableCollection<string> States { get; set; }
+        public string SelectedState { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+
             sim = new InputSimulator();
+            States = new ObservableCollection<string> { "Slovenská republika", "Česká republika", "Maďarsko", "Rakúsko", "Poľsko", "USA" };
+            SelectedState = States[0];
+            year.Text = "2021";
+            dic.textBox.TextChanged += dic_TextChanged;
+
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
         }
 
@@ -39,56 +51,35 @@ namespace WpfApp
         [DllImport("USER32.DLL")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void fillFirstRowButton_Click(object sender, RoutedEventArgs e)
         {
-            button1.IsEnabled = false;
-            //button.IsEnabled = false;
             fillFirsRow();
-
-            //groupBox1.IsEnabled = false;
-            //groupBox2.IsEnabled = true;
-            //groupBox3.IsEnabled = true;
-            button1.IsEnabled = true;
         }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void insertNewCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            button2.IsEnabled = false;
+            //button2.IsEnabled = false;
             //this.Dispatcher.Invoke(() =>
             //{
             //    insertNewCustomer();
             //});
 
-            //button1.IsEnabled = false;
             insertNewCustomer();
-
-            //groupBox1.IsEnabled = false;
-            //groupBox2.IsEnabled = false;
-            //groupBox3.IsEnabled = true;
-
-            if(customerNumTextBox.Text.Length > 0) customerNumTextBox.Text = (Int32.Parse(customerNumTextBox.Text) + 1).ToString();
-            button2.IsEnabled = true;
         }
 
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void fillFormButton_Click(object sender, RoutedEventArgs e)
         {
-            button3.IsEnabled = false;
             fillForm();
 
-            //groupBox1.IsEnabled = true;
-            //groupBox2.IsEnabled = false;
-            //groupBox3.IsEnabled = false;
+            if (customerNumber.Text.Length > 0) customerNumber.textBox.Text = (Int32.Parse(customerNumber.textBox.Text) + 1).ToString();
+            if (invoiceNumber.Text.Length > 0) invoiceNumber.textBox.Text = (Int32.Parse(invoiceNumber.textBox.Text) + 1).ToString();
 
-            if(invoiceNumTextBox.Text.Length > 0) invoiceNumTextBox.Text = (Int32.Parse(invoiceNumTextBox.Text) + 1).ToString();
+            customerName.textBox.Text = "";
 
-            customerTextBox.Clear();
+            ico.textBox.Text = "";
+            dic.textBox.Text = "";
 
-            icoTextBox.Clear();
-            dicTextBox.Clear();
-
-            amountTextBox.Clear();
-            button3.IsEnabled = true;
-            Keyboard.Focus(customerNameTextBox);
+            amount.textBox.Text = "";
         }
 
         private void fillFirsRow()
@@ -99,16 +90,16 @@ namespace WpfApp
             SetForegroundWindow(calcWindow);
 
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
-            sim.Keyboard.Sleep(delay).TextEntry(yearTextBox.Text.Substring(2, 2) + invoiceNumTextBox.Text);
+            sim.Keyboard.Sleep(delay).TextEntry(year.Text.Substring(2, 2) + invoiceNumber.Text);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
-            sim.Keyboard.Sleep(delay).TextEntry(yearTextBox.Text + invoiceNumTextBox.Text); // Číslo faktúry
+            sim.Keyboard.Sleep(delay).TextEntry(year.Text + invoiceNumber.Text); // Číslo faktúry
 
             sim.Keyboard.Sleep(delay + 100).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay + 1500).KeyPress(VirtualKeyCode.RIGHT); // Wait for window to open
             sim.Keyboard.Sleep(delay).ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.F7);
 
-            sim.Keyboard.Sleep(delay).TextEntry(customerTextBox.Text); // Názov odberateľa
+            sim.Keyboard.Sleep(delay).TextEntry(customerName.Text); // Názov odberateľa
 
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
         }
@@ -122,23 +113,23 @@ namespace WpfApp
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.TAB);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.INSERT);
 
-            if (customerNumTextBox.Text.Length < 4)
+            if (customerNumber.Text.Length < 4)
             {
-                for (int i = 0; i < 4 - customerNumTextBox.Text.Length; i++)
+                for (int i = 0; i < 4 - customerNumber.Text.Length; i++)
                 {
-                    customerNumTextBox.Text = customerNumTextBox.Text.Insert(0, "0");
+                    customerNumber.Text = customerNumber.Text.Insert(0, "0");
                 }
             }
 
             sim.Keyboard.Sleep(delay + 500);
-            //sim.Keyboard.Sleep(delay + 500).TextEntry(customerNumTextBox.Text); // Číslo odberateľa // DOESN'T WORK
+            //sim.Keyboard.Sleep(delay + 500).TextEntry(customerNumber.Text); // Číslo odberateľa // DOESN'T WORK
             for (int i = 0; i < 4; i++)
             {
-                sim.Keyboard.Sleep(delay).TextEntry(customerNumTextBox.Text[i]); // Číslo odberateľa
+                sim.Keyboard.Sleep(delay).TextEntry(customerNumber.Text[i]); // Číslo odberateľa
             }
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
-            sim.Keyboard.Sleep(delay).TextEntry(customerTextBox.Text); // Názov odberateľa
+            sim.Keyboard.Sleep(delay).TextEntry(customerName.Text); // Názov odberateľa
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
@@ -147,19 +138,19 @@ namespace WpfApp
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
-            sim.Keyboard.Sleep(delay).TextEntry(stateComboBox.Text); // Štát
+            sim.Keyboard.Sleep(delay).TextEntry(state.Text); // Štát
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
-            if (icoTextBox.Text.Length > 0) sim.Keyboard.Sleep(delay).TextEntry(icoTextBox.Text);
+            if (ico.Text.Length > 0) sim.Keyboard.Sleep(delay).TextEntry(ico.Text);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN); // IČO
 
-            if (icoTextBox.Text.Length > 0) sim.Keyboard.Sleep(delay).TextEntry(dicTextBox.Text);
+            if (ico.Text.Length > 0) sim.Keyboard.Sleep(delay).TextEntry(dic.Text);
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN); // DIČ
 
-            if(dicTextBox.Text.Length > 0)
+            if(dic.Text.Length > 0)
             {
                 sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
-                sim.Keyboard.Sleep(delay).TextEntry(icDphTextBox.Text);
+                sim.Keyboard.Sleep(delay).TextEntry(icDph.Text);
             }
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN); // IČ DPH
 
@@ -177,9 +168,6 @@ namespace WpfApp
         {
             const int delay = 100;
 
-            //IntPtr calcWindow = FindWindow(null, "Formulár knihy vyšlých faktúr");
-            //SetForegroundWindow(calcWindow);
-
             sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.LMENU, VirtualKeyCode.TAB);
 
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.TAB); // Extra enter, one enter gets "eaten" after Alt+Tab-ing
@@ -188,7 +176,7 @@ namespace WpfApp
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
             //sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN); // WARNING: If Cislo odberatela window was already opened once and closed, this is then NECESSARY
 
-            sim.Keyboard.Sleep(delay).TextEntry(amountTextBox.Text); // Fakturovane eura
+            sim.Keyboard.Sleep(delay).TextEntry(amount.Text); // Fakturovane eura
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
@@ -197,7 +185,6 @@ namespace WpfApp
             sim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             var dateOfPaymentText = DateTime.Parse(date1Picker.Text).ToString("dd.MM.yyyy");
-            //var dueDateText = DateTime.Parse(dateOfPaymentText).AddDays(15).ToString("dd.MM.yyyy");
             var dueDateText = DateTime.Parse(date2Picker.Text).ToString("dd.MM.yyyy");
 
             sim.Keyboard.Sleep(delay).TextEntry(dateOfPaymentText); // Datum dodania/platby
@@ -216,11 +203,6 @@ namespace WpfApp
         {
             if (e.Key == Key.Escape)
                 Close();
-        }
-
-        private void customerTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            customerNameTextBox.Text = (sender as TextBox).Text;
         }
 
         private void dateCheckBox_Checked(object sender, RoutedEventArgs e)
@@ -247,10 +229,10 @@ namespace WpfApp
             }
         }
 
-        private void dicTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void dic_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string icDph = "SK" + (sender as TextBox).Text;
-            icDphTextBox.Text = icDph;
+            string icDphEdited = "SK" + (sender as TextBox).Text;
+            icDph.textBox.Text = icDphEdited;
         }
     }
 }

@@ -10,8 +10,4 @@
     <PackageReference Include="InputSimulator" Version="1.0.4" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="User Controls\" />
-  </ItemGroup>
-
 </Project>
