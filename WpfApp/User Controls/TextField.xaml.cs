@@ -20,7 +20,14 @@ namespace WpfApp.User_Controls
     /// </summary>
     public partial class TextField : UserControl
     {
+        /// <summary>
+        /// Label value.
+        /// </summary>
         public string Title { get; set; } = "";
+
+        /// <summary>
+        /// TextBox value.
+        /// </summary>
         public string Text { get; set; } = "";
 
         public TextField()
