@@ -25,10 +25,18 @@ namespace WpfApp.UserControls
         /// </summary>
         public string Title { get; set; } = "";
 
+        
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+                nameof(Text), typeof(string), typeof(TextField),
+                new PropertyMetadata(default(string)));
         /// <summary>
         /// TextBox value.
         /// </summary>
-        public string Text { get; set; } = "";
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
 
         public TextField()
         {

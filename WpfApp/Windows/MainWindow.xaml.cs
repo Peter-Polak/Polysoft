@@ -71,7 +71,7 @@ namespace WpfApp
             InsertNewCustomer();
 
             // Increment customer number
-            if (customerNumber.Text.Length > 0) customerNumber.textBox.Text = (Int32.Parse(customerNumber.textBox.Text) + 1).ToString();
+            if (customerNumber.Text.Length > 0) customerNumber.Text = (Int32.Parse(customerNumber.Text) + 1).ToString();
         }
 
         private void fillFormButton_Click(object sender, RoutedEventArgs e)
@@ -79,15 +79,15 @@ namespace WpfApp
             FillForm();
 
             // Increment invoice number
-            if (invoiceNumber.Text.Length > 0) invoiceNumber.textBox.Text = (Int32.Parse(invoiceNumber.textBox.Text) + 1).ToString();
+            if (invoiceNumber.Text.Length > 0) invoiceNumber.Text = (Int32.Parse(invoiceNumber.Text) + 1).ToString();
 
             // Clear form
-            customerName.textBox.Text = "";
+            customerName.Text = "";
 
-            ico.textBox.Text = "";
-            dic.textBox.Text = "";
+            ico.Text = "";
+            dic.Text = "";
 
-            amount.textBox.Text = "";
+            amount.Text = "";
         }
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace WpfApp
         private void dic_TextChanged(object sender, TextChangedEventArgs e)
         {
             string icDphEdited = "SK" + (sender as TextBox).Text;
-            icDph.textBox.Text = icDphEdited;
+            icDph.Text = icDphEdited;
         }
     }
 }
