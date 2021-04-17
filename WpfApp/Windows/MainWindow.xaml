@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:WpfApp.UserControls"
         xmlns:cc="clr-namespace:WpfApp.CustomControls"
-        Title="Polysoft - Add new invoice" Height="526" Width="504">
+        Title="Polysoft - Add new invoice" Height="682" Width="530" x:Name="window">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -23,14 +23,36 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
+                   Margin="20, 10, 20, 10" Width="450" 
+                   >
+            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+                Predtym nez zacnete, otvorte "Knihu vyslych faktur" -> "Nova veta".
+            </TextBlock>
+            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+                Krok 1 a 2: Vyplnte policka Rok, Cislo faktury, Nazov oberatela a kliknite na tlacidlo "Vyplnit".
+            </TextBlock>
+            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+                Krok 3a: Ak sa odberatel nenasiel, stlacte enter a vyplnte cislo odberatela a ostatne policka podla potreby a kliknite na tlacidlo "Vyplnit". Skontrolujte udaje a potvrdte pridanie Enterom.
+            </TextBlock>
+            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+                Krok 3b: Ak sa odberatel nasiel/uz ste uspesne pridali noveho odberatela (vykonali Krok 3a), vyplnte vsetky policka a kliknite na tlacidlo "Vyplnit". Skontrolujte udaje a potvrdte pridanie Enterom.
+            </TextBlock>
+        </StackPanel>
+
         <!-- Invoice number column -->
-        <Grid Grid.Column="0" Margin="10, 0, 10, 0">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="10, 0, 10, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -55,7 +77,7 @@
         </Grid>
 
         <!-- Customer column -->
-        <Grid Grid.Column="1" Margin="10, 0, 10, 0">
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10, 0, 10, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -125,7 +147,7 @@
                     <!--<cc:MyButton Text="Testing" Background="Chocolate"></cc:MyButton>-->
                 </StackPanel>
 
-                <Button x:Name="insertNewCustomerButton" Content="Vložiť" 
+                <Button x:Name="insertNewCustomerButton" Content="Vyplniť" 
                     Grid.Row="6"
                     Width="62" 
                     Click="insertNewCustomerButton_Click"/>
@@ -133,7 +155,7 @@
         </Grid>
 
         <!-- Fill invoice column -->
-        <Grid Grid.Column="2" Margin="10, 0, 10, 0">
+        <Grid Grid.Row="1" Grid.Column="2" Margin="10, 0, 10, 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
