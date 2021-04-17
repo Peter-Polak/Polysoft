@@ -27,17 +27,17 @@ namespace WpfApp
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// Keyboard simularator
+        /// Keyboard simularator.
         /// </summary>
         private InputSimulator sim;
 
         /// <summary>
-        /// Predefined states to choose from
+        /// Predefined states to choose from.
         /// </summary>
         public ObservableCollection<string> States { get; set; }
 
         /// <summary>
-        /// Initialy chosen state
+        /// Initialy chosen state.
         /// </summary>
         public string SelectedState { get; set; }
 
