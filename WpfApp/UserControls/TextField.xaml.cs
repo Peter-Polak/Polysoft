@@ -23,7 +23,7 @@ namespace WpfApp.UserControls
         /// <summary>
         /// Label value.
         /// </summary>
-        public string Title { get; set; } = "";
+        public string Title { get; set; }
 
         
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
@@ -42,6 +42,9 @@ namespace WpfApp.UserControls
         {
             InitializeComponent();
             this.DataContext = this;
+
+            Title = "";
+            Text = "";
         }
 
     }
