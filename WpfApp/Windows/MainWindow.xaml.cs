@@ -47,9 +47,14 @@ namespace WpfApp
             DataContext = this;
 
             sim = new InputSimulator();
-            States = new ObservableCollection<string> { "Slovenská republika", "Česká republika", "Maďarsko", "Rakúsko", "Poľsko", "USA" };
+
+            States = new ObservableCollection<string>();
+            foreach (var state in Properties.Settings.Default.States) States.Add(state);
             SelectedState = States[0];
-            year.Text = "2021";
+
+            year.Text = Properties.Settings.Default.Year;
+            invoiceNumber.Text = Properties.Settings.Default.InvoiceNumber;
+            customerNumber.Text = Properties.Settings.Default.CustomerNumber;
             dic.textBox.TextChanged += dic_TextChanged;
 
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
@@ -88,6 +93,11 @@ namespace WpfApp
             dic.Text = "";
 
             amount.Text = "";
+
+            Properties.Settings.Default.Year = year.Text;
+            Properties.Settings.Default.CustomerNumber = customerNumber.Text;
+            Properties.Settings.Default.InvoiceNumber = invoiceNumber.Text;
+            Properties.Settings.Default.Save();
         }
 
         /// <summary>
@@ -297,7 +307,7 @@ namespace WpfApp
         }
 
         /// <summary>
-        /// Update IČ DPh field if the user is typing in DIČ field and format it (prepend SK at the start).
+        /// Update IČ DPh field if the user is typing in DIČ field and format it (prepends SK at the start).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
