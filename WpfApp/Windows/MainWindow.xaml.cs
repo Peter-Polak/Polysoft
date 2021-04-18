@@ -36,11 +36,6 @@ namespace WpfApp
         /// </summary>
         public ObservableCollection<string> States { get; set; }
 
-        /// <summary>
-        /// Initialy chosen state.
-        /// </summary>
-        public string SelectedState { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
@@ -50,7 +45,6 @@ namespace WpfApp
 
             States = new ObservableCollection<string>();
             foreach (var state in Properties.Settings.Default.States) States.Add(state);
-            SelectedState = States[0];
 
             year.Text = Properties.Settings.Default.Year;
             invoiceNumber.Text = Properties.Settings.Default.InvoiceNumber;

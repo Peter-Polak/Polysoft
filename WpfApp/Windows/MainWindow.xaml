@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:uc="clr-namespace:WpfApp.UserControls"
         xmlns:cc="clr-namespace:WpfApp.CustomControls"
-        Title="Polysoft - Add new invoice" Height="682" Width="530" x:Name="window">
+        Title="Polysoft - Add new invoice" Height="600" Width="600" x:Name="window">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -16,181 +16,100 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="Button">
-                <Setter Property="Padding" Value="10, 5, 10, 5"/>
-                <Setter Property="Margin" Value="10, 5, 10, 5"/>
+                <Setter Property="Padding" Value="10 5"/>
+                <Setter Property="Margin" Value="50 10"/>
+            </Style>
+
+            <Style TargetType="TextBlock">
+                <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+                <Setter Property="Margin" Value="10 5"/>
+                <Setter Property="FontSize" Value="13"/>
             </Style>
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" 
-                   Margin="20, 10, 20, 10" Width="450" 
-                   >
-            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+    <StackPanel>
+        <StackPanel Margin="20 10">
+            <TextBlock >
                 Predtym nez zacnete, otvorte "Knihu vyslych faktur" -> "Nova veta".
             </TextBlock>
-            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+            <TextBlock>
                 Krok 1 a 2: Vyplnte policka Rok, Cislo faktury, Nazov oberatela a kliknite na tlacidlo "Vyplnit".
             </TextBlock>
-            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+            <TextBlock>
                 Krok 3a: Ak sa odberatel nenasiel, stlacte enter a vyplnte cislo odberatela a ostatne policka podla potreby a kliknite na tlacidlo "Vyplnit". Skontrolujte udaje a potvrdte pridanie Enterom.
             </TextBlock>
-            <TextBlock TextWrapping="WrapWithOverflow" FontSize="14">
+            <TextBlock>
                 Krok 3b: Ak sa odberatel nasiel/uz ste uspesne pridali noveho odberatela (vykonali Krok 3a), vyplnte vsetky policka a kliknite na tlacidlo "Vyplnit". Skontrolujte udaje a potvrdte pridanie Enterom.
             </TextBlock>
         </StackPanel>
 
-        <!-- Invoice number column -->
-        <Grid Grid.Row="1" Grid.Column="0" Margin="10, 0, 10, 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <Label Content="1. Prvý riadok"/>
-            <uc:TextField x:Name="year" Title="Rok:" 
-                          Grid.Row="1"/>
-            <uc:TextField x:Name="invoiceNumber" Title="Čislo faktury:"
-                          Grid.Row="2"/>
-            <Button x:Name="fillFirstRowButton" Content="Vyplniť" 
-                    Grid.Row="4"
-                    Width="62" 
+            
+            <!-- Invoice number column -->
+            <StackPanel Grid.Column="0" Margin="10">
+                <Label Content="1. Prvý riadok"/>
+                <uc:TextField x:Name="year" Title="Rok:" />
+                <uc:TextField x:Name="invoiceNumber" Title="Čislo faktury:"/>
+                <Button x:Name="fillFirstRowButton" Content="Vyplniť" 
                     Click="fillFirstRowButton_Click"/>
-        </Grid>
 
-        <!-- Customer column -->
-        <Grid Grid.Row="1" Grid.Column="1" Margin="10, 0, 10, 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <!-- Look up customer -->
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
+                <!-- Look up customer -->
                 <Label Content="2. Hladať odberateľa"/>
-                <uc:TextField x:Name="customerName" 
-                              Title="Názov odberateľa:"
-                              Grid.Row="1"/>
+                <uc:TextField x:Name="customerName" Title="Názov odberateľa:"/>
                 <Button x:Name="findCustomerButton" Content="Hladať" 
-                        Grid.Row="2"
-                        Width="62" 
                         Click="fillFirstRowButton_Click"/>
-            </Grid>
+            </StackPanel>
 
-            <!-- Insert new customer -->
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <!-- Customer column -->
+            <StackPanel Grid.Column="1" Margin="10">
+                <!-- Insert new customer -->
+                <StackPanel Grid.Row="1">
+                    <Label Content="3.a Vložiť nového odberateľa"/>
+                    <uc:TextField x:Name="customerNumber" Title="Čislo odberateľa:"/>
+                    <uc:TextField x:Name="ico" Title="IČO:"/>
+                    <uc:TextField x:Name="dic" Title="DIČ:"/>
+                    <uc:TextField x:Name="icDph" Title="IČ DPH:"/>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <Label Content="Štát"/>
+                        <ComboBox x:Name="state" IsEditable="True" 
+                              ItemsSource="{Binding States}" SelectedIndex="0"/>
+                        <!--<cc:MyButton Text="Testing" Background="Chocolate"></cc:MyButton>-->
+                    </StackPanel>
 
-                <Label Content="3.a Vložiť nového odberateľa"/>
-                <uc:TextField x:Name="customerNumber" 
-                              Title="Čislo odberateľa:"
-                              Grid.Row="1"/>
-                <uc:TextField x:Name="ico"
-                              Title="IČO:"
-                              Grid.Row="2"/>
-                <uc:TextField x:Name="dic"
-                              Title="DIČ:"
-                              Grid.Row="3"/>
-                <uc:TextField x:Name="icDph"
-                              Title="IČ DPH:"
-                              Grid.Row="4"/>
+                    <Button x:Name="insertNewCustomerButton" Content="Vyplniť" 
+                    Click="insertNewCustomerButton_Click"/>
+                </StackPanel>
+            </StackPanel>
 
-                <StackPanel Grid.Row="5">
-                    <Label Content="Štát"/>
-                    <ComboBox x:Name="state" IsEditable="True" 
-                              ItemsSource="{Binding States}" 
-                              SelectedItem="{Binding SelectedState, Mode=TwoWay}"/>
-                    <!--<cc:MyButton Text="Testing" Background="Chocolate"></cc:MyButton>-->
+            <!-- Fill invoice column -->
+            <StackPanel Grid.Column="2" Margin="10">
+                <Label Content="3.b Vyplniť formulár"/>
+                <uc:TextField x:Name="amount" Title="Faktúrované eurá:"/>
+
+                <StackPanel>
+                    <Label Content="Dátum dodania/platby"/>
+                    <DatePicker x:Name="date1Picker" FirstDayOfWeek="Monday"
+                            SelectedDateChanged="date1Picker_SelectedDateChanged"/>
                 </StackPanel>
 
-                <Button x:Name="insertNewCustomerButton" Content="Vyplniť" 
-                    Grid.Row="6"
-                    Width="62" 
-                    Click="insertNewCustomerButton_Click"/>
-            </Grid>
-        </Grid>
-
-        <!-- Fill invoice column -->
-        <Grid Grid.Row="1" Grid.Column="2" Margin="10, 0, 10, 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="3.b Vyplniť formulár"/>
-            <uc:TextField x:Name="amount" 
-                          Title="Faktúrované eurá:"
-                          Grid.Row="1"/>
-
-            <StackPanel Grid.Row="2">
-                <Label Content="Dátum dodania/platby"/>
-                <DatePicker x:Name="date1Picker" Width="130" FirstDayOfWeek="Monday"
-                            SelectedDateChanged="date1Picker_SelectedDateChanged"/>
-            </StackPanel>
-
-            <StackPanel Grid.Row="3">
-                <Label Content="Datum splatnosti"/>
-                <DatePicker x:Name="date2Picker" Width="130" FirstDayOfWeek="Monday"/>
-                <CheckBox x:Name="dateCheckBox" Content="Rovnaký ako dodania" 
+                <StackPanel>
+                    <Label Content="Datum splatnosti"/>
+                    <DatePicker x:Name="date2Picker" FirstDayOfWeek="Monday"/>
+                    <CheckBox x:Name="dateCheckBox" Content="Rovnaký ako dodania" Margin="10"
                           Checked="dateCheckBox_Checked" Unchecked="dateCheckBox_Unchecked"/>
-            </StackPanel>
+                </StackPanel>
 
-            <Button x:Name="fillFormButton" Content="Vyplniť" 
-                    Grid.Row="4"
-                    Width="62" 
+                <Button x:Name="fillFormButton" Content="Vyplniť" 
                     Click="fillFormButton_Click"/>
+            </StackPanel>
         </Grid>
-    </Grid>
-    
+        
+    </StackPanel>
 </Window>
