@@ -11,10 +11,6 @@
 
     <Window.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/Generic.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
             <Style TargetType="Button">
                 <Setter Property="Padding" Value="10 5"/>
                 <Setter Property="Margin" Value="50 10"/>
