@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Text.RegularExpressions;
+using WpfApp.Base;
 
 namespace WpfApp.Models
 {
@@ -19,7 +21,7 @@ namespace WpfApp.Models
         public string IcDph
         {
             get { return _isDph; }
-            set { _isDph = "SK" + value; }
+            set { _isDph = Regex.Replace(value, "[^0-9.]", ""); }
         }
         public string Account { get; set; } = "3110001";
         public string Type { get; set; } = "VFA";
