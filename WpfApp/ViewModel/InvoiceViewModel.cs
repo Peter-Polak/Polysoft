@@ -154,15 +154,15 @@ namespace WpfApp.ViewModel
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN); // IČ DPH
 
             // Fill account constant
-            _inpSim.Keyboard.Sleep(delay).TextEntry("3110001"); // ÚČet
+            _inpSim.Keyboard.Sleep(delay).TextEntry(Invoice.Customer.Account); // ÚČet
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             // Fill type of document constant
-            _inpSim.Keyboard.Sleep(delay).TextEntry("VFA"); // Druh dokladu
+            _inpSim.Keyboard.Sleep(delay).TextEntry(Invoice.Customer.Type); // Druh dokladu
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             // Fill group of customer constant
-            _inpSim.Keyboard.Sleep(delay).TextEntry("00"); // Skupina odberateľov
+            _inpSim.Keyboard.Sleep(delay).TextEntry(Invoice.Customer.Group); // Skupina odberateľov
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
         }
 
@@ -213,7 +213,7 @@ namespace WpfApp.ViewModel
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             // Fill invoice type
-            _inpSim.Keyboard.Sleep(delay).TextEntry("VYR"); // Druh faktury
+            _inpSim.Keyboard.Sleep(delay).TextEntry(Invoice.Type); // Druh faktury
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             // Skip unnecessary fields
