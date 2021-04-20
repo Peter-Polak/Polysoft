@@ -14,10 +14,11 @@ namespace WpfApp.Models
         public int Year { get; set; } = Int32.Parse(Properties.Settings.Default.Year);
         public string Number { get; set; } = Properties.Settings.Default.InvoiceNumber;
 
-        public Customer Customer { get; set; }
+        public Customer Customer { get; set; } = new Customer();
         public double Amount { get; set; }
         public DateTime DateOfPayment { get; set; }
         public DateTime DueDate { get; set; }
+        public string Type { get; set; } = "VYR";
 
         #endregion
     }
