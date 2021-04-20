@@ -16,6 +16,7 @@ namespace WpfApp.Models
 
         public string Name { get; set; }
         public string Number { get; set; } = Properties.Settings.Default.CustomerNumber;
+        public string State { get; set; }
         public string Ico { get; set; }
         public string Dic { get; set; }
         public string IcDph

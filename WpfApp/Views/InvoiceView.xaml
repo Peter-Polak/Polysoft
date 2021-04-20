@@ -79,7 +79,7 @@
                     <StackPanel>
                         <Label Content="Štát:"/>
                         <ComboBox x:Name="state" IsEditable="True" 
-                              ItemsSource="{Binding States}" SelectedItem="{Binding SelectedState}"/>
+                              ItemsSource="{Binding States}" SelectedItem="{Binding Path=Invoice.Customer.State}"/>
                         <!--<cc:MyButton Text="Testing" Background="Chocolate"></cc:MyButton>-->
                     </StackPanel>
 

@@ -47,15 +47,12 @@ namespace WpfApp.ViewModel
         /// </summary>
         public ObservableCollection<string> States { get; set; }
 
-        /// <summary>
-        /// Currently selected state.
-        /// </summary>
-        public string SelectedState { get; set; }
+        public bool MyProperty { get; set; }
 
         #endregion
 
         #region Commands
-        
+
         public ICommand FillFirstRowCommand { get; set; }
         public ICommand FillFormCommand { get; set; }
         public ICommand InsertNewCustomerCommand { get; set; }
@@ -70,7 +67,7 @@ namespace WpfApp.ViewModel
             Invoice = new Invoice();
             States = new ObservableCollection<string>();
             foreach (var state in Properties.Settings.Default.States) States.Add(state);
-            SelectedState = States[0];
+            Invoice.Customer.State = States[0];
 
             FillFirstRowCommand = new RelayCommand(FillFirsRow);
             FillFormCommand = new RelayCommand(FillForm);
@@ -155,7 +152,7 @@ namespace WpfApp.ViewModel
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             // Fill state
-            _inpSim.Keyboard.Sleep(delay).TextEntry(SelectedState); // Štát
+            _inpSim.Keyboard.Sleep(delay).TextEntry(Invoice.Customer.State); // Štát
             _inpSim.Keyboard.Sleep(delay).KeyPress(VirtualKeyCode.RETURN);
 
             // Fill IČO if needed
