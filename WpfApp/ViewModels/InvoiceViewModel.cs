@@ -6,8 +6,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using WindowsInput;
 using WindowsInput.Native;
+using WpfApp.Base;
 using WpfApp.Models;
 
 namespace WpfApp.ViewModel
@@ -35,13 +37,28 @@ namespace WpfApp.ViewModel
 
         #region Properties
 
+        /// <summary>
+        /// Invoice object that the form is binding to.
+        /// </summary>
         public Invoice Invoice { get; set; }
 
         /// <summary>
         /// Predefined states to choose from.
         /// </summary>
         public ObservableCollection<string> States { get; set; }
+
+        /// <summary>
+        /// Currently selected state.
+        /// </summary>
         public string SelectedState { get; set; }
+
+        #endregion
+
+        #region Commands
+        
+        public ICommand FillFirstRowCommand { get; set; }
+        public ICommand FillFormCommand { get; set; }
+        public ICommand InsertNewCustomerCommand { get; set; }
 
         #endregion
 
@@ -52,8 +69,12 @@ namespace WpfApp.ViewModel
             _inpSim = new InputSimulator();
             Invoice = new Invoice();
             States = new ObservableCollection<string>();
-
             foreach (var state in Properties.Settings.Default.States) States.Add(state);
+            SelectedState = States[0];
+
+            FillFirstRowCommand = new RelayCommand(FillFirsRow);
+            FillFormCommand = new RelayCommand(FillForm);
+            InsertNewCustomerCommand = new RelayCommand(InsertNewCustomer);
         }
 
         #endregion
