@@ -34,15 +34,23 @@
             <!-- Invoice number column -->
             <StackPanel Grid.Column="0" Margin="10">
                 <Label Content="1. Prvý riadok"/>
-                <Label Content="{Binding Test}"/>
-                <TextBox Text="{Binding Path=Test, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <Label Content="Rok:"/>
+                <TextBox Text="{Binding Path=Invoice.Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Čislo faktury:"/>
+                <TextBox Text="{Binding Path=Invoice.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <!--<uc:TextField x:Name="year" Title="Rok:" Text="{Binding Path=Invoice.Year}"/>
                 <uc:TextField x:Name="invoiceNumber" Title="Čislo faktury:" Text="{Binding Path=Invoice.Number}"/>-->
+                
                 <Button x:Name="fillFirstRowButton" Content="Vyplniť" />
 
                 <!-- Look up customer -->
                 <Label Content="2. Hladať odberateľa"/>
+
+                <Label Content="Názov odberateľa:"/>
+                <TextBox Text="{Binding Path=Invoice.Customer.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <!--<uc:TextField x:Name="customerName" Title="Názov odberateľa:" Text="{Binding Path=Invoice.Customer.Name}"/>-->
+                
                 <Button x:Name="findCustomerButton" Content="Hladať" />
             </StackPanel>
 
@@ -51,15 +59,27 @@
                 <!-- Insert new customer -->
                 <StackPanel Grid.Row="1">
                     <Label Content="3.a Vložiť nového odberateľa"/>
+
+                    <Label Content="Čislo odberateľa:"/>
+                    <TextBox Text="{Binding Path=Invoice.Customer.Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Content="IČO:"/>
+                    <TextBox Text="{Binding Path=Invoice.Customer.Ico, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Content="DIČ:"/>
+                    <TextBox Text="{Binding Path=Invoice.Customer.Dic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Content="IČ DPH:"/>
+                    <TextBox Text="{Binding Path=Invoice.Customer.IcDph, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <!--<uc:TextField x:Name="customerNumber" Title="Čislo odberateľa:"/>
-                    <uc:TextField x:Name="ico" Title="IČO:" Text="{Binding Path=Invoice.Ico}"/>
-                    <uc:TextField x:Name="dic" Title="DIČ:" Text="{Binding Path=Invoice.Dic}"/>
-                    <uc:TextField x:Name="icDph" Title="IČ DPH:" Text="{Binding Path=Invoice.IcDph}"/>-->
+                    <uc:TextField x:Name="ico" Title="IČO:" Text="{Binding Path=Invoice.Customer.Ico}"/>
+                    <uc:TextField x:Name="dic" Title="DIČ:" Text="{Binding Path=Invoice.Customer.Dic}"/>
+                    <uc:TextField x:Name="icDph" Title="IČ DPH:" Text="{Binding Path=Invoice.Customer.IcDph}"/>-->
 
                     <StackPanel>
                         <Label Content="Štát"/>
                         <ComboBox x:Name="state" IsEditable="True" 
-                              ItemsSource="{Binding States}" SelectedIndex="0"/>
+                              ItemsSource="{Binding States}" SelectedItem="{Binding SelectedState}" SelectedIndex="0"/>
                         <!--<cc:MyButton Text="Testing" Background="Chocolate"></cc:MyButton>-->
                     </StackPanel>
 
@@ -70,6 +90,9 @@
             <!-- Fill invoice column -->
             <StackPanel Grid.Column="2" Margin="10">
                 <Label Content="3.b Vyplniť formulár"/>
+
+                <Label Content="DIČ:"/>
+                <TextBox Text="{Binding Path=Invoice.Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <!--<uc:TextField x:Name="amount" Title="Faktúrované eurá:" Text="{Binding Path=Invoice.Amount}"/>-->
 
                 <StackPanel>
