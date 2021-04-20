@@ -1,12 +1,19 @@
-﻿<UserControl x:Class="WpfApp.View.InvoiceView"
+﻿<UserControl x:Class="WpfApp.Views.InvoiceView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfApp.View"
+             xmlns:local="clr-namespace:WpfApp.Views"
              xmlns:uc="clr-namespace:WpfApp.UserControls"
+             xmlns:cv="clr-namespace:WpfApp.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <cv:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     
     <StackPanel>
         <StackPanel Margin="20 10">
@@ -78,7 +85,7 @@
 
                     <StackPanel>
                         <Label Content="Štát:"/>
-                        <ComboBox x:Name="state" IsEditable="True" 
+                        <ComboBox IsEditable="True" 
                               ItemsSource="{Binding States}" SelectedItem="{Binding Path=Invoice.Customer.State}"/>
                         <!--<cc:MyButton Text="Testing" Background="Chocolate"></cc:MyButton>-->
                     </StackPanel>
@@ -97,13 +104,17 @@
 
                 <StackPanel>
                     <Label Content="Dátum dodania/platby"/>
-                    <DatePicker x:Name="date1Picker" FirstDayOfWeek="Monday" Text="{Binding Path=Invoice.DateOfPayment, Mode=TwoWay}"/>
+                    <DatePicker FirstDayOfWeek="Monday" Text="{Binding Path=Invoice.DateOfPayment, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <StackPanel>
                     <Label Content="Datum splatnosti"/>
-                    <DatePicker x:Name="date2Picker" FirstDayOfWeek="Monday" Text="{Binding Path=Invoice.DueDate, Mode=TwoWay}"/>
-                    <CheckBox x:Name="dateCheckBox" Content="Rovnaký ako dodania" Margin="10"/>
+                    <DatePicker FirstDayOfWeek="Monday" 
+                                Text="{Binding Path=Invoice.DueDate, Mode=TwoWay}" 
+                                IsEnabled="{Binding Path=IsDueDateSameAsDateOfPayment, Converter={StaticResource InverseBooleanConverter}}"/>
+                    <CheckBox Content="Rovnaký ako dodania" 
+                              IsChecked="{Binding Path=IsDueDateSameAsDateOfPayment}" 
+                              Margin="10"/>
                 </StackPanel>
 
                 <Button Content="Vyplniť" Command="{Binding FillFormCommand}"/>

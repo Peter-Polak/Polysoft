@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp.View
+namespace WpfApp.Views
 {
     /// <summary>
     /// Interaction logic for InvoiceView.xaml

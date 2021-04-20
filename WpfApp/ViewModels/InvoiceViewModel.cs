@@ -12,7 +12,7 @@ using WindowsInput.Native;
 using WpfApp.Base;
 using WpfApp.Models;
 
-namespace WpfApp.ViewModel
+namespace WpfApp.ViewModels
 {
     class InvoiceViewModel : ObservableObject
     {
@@ -47,7 +47,7 @@ namespace WpfApp.ViewModel
         /// </summary>
         public ObservableCollection<string> States { get; set; }
 
-        public bool MyProperty { get; set; }
+        public bool IsDueDateSameAsDateOfPayment { get; set; }
 
         #endregion
 
