@@ -103,12 +103,12 @@
                 <!--<uc:TextField x:Name="amount" Title="Faktúrované eurá:" Text="{Binding Path=Invoice.Amount}"/>-->
 
                 <StackPanel>
-                    <Label Content="Dátum dodania/platby"/>
+                    <Label Content="Dátum dodania/platby:"/>
                     <DatePicker FirstDayOfWeek="Monday" Text="{Binding Path=Invoice.DateOfPayment, Mode=TwoWay}"/>
                 </StackPanel>
 
                 <StackPanel>
-                    <Label Content="Datum splatnosti"/>
+                    <Label Content="Datum splatnosti:"/>
                     <DatePicker FirstDayOfWeek="Monday" 
                                 Text="{Binding Path=Invoice.DueDate, Mode=TwoWay}" 
                                 IsEnabled="{Binding Path=IsDueDateSameAsDateOfPayment, Converter={StaticResource InverseBooleanConverter}}"/>
